@@ -5,10 +5,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,12 +22,14 @@ public class MainPage extends AppCompatActivity {
     DrawerLayout sideMenu;
     NavigationView sideView;
     String myUser;
+    LinearLayout search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         sideMenu = findViewById(R.id.drawLayout);
         sideView = findViewById(R.id.navView);
+        search = findViewById(R.id.mainSearch);
 
         myUser = getIntent().getStringExtra("username");
 
@@ -52,6 +57,15 @@ public class MainPage extends AppCompatActivity {
                         return true;
                 }
                 return false;
+            }
+        });
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MainSearch.class);
+                intent.putExtra("username", myUser);
+                startActivity(intent);
             }
         });
     }
