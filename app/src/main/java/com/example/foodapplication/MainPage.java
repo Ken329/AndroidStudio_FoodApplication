@@ -11,11 +11,18 @@ import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainPage extends AppCompatActivity {
     ActionBarDrawerToggle toggle = null;
@@ -23,6 +30,8 @@ public class MainPage extends AppCompatActivity {
     NavigationView sideView;
     String myUser;
     LinearLayout search;
+    ImageView pizza, burger, donut, onion, hotdog, bento, fish, ham, roll, taco, turkey, fries, banana, icecream, cupcake, maccoron;
+    DatabaseReference ref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +39,22 @@ public class MainPage extends AppCompatActivity {
         sideMenu = findViewById(R.id.drawLayout);
         sideView = findViewById(R.id.navView);
         search = findViewById(R.id.mainSearch);
+        pizza = findViewById(R.id.mainPizza);
+        burger = findViewById(R.id.mainBurger);
+        donut = findViewById(R.id.mainDonut);
+        onion = findViewById(R.id.mainOnion);
+        hotdog = findViewById(R.id.mainHotdog);
+        bento = findViewById(R.id.mainBento);
+        fish = findViewById(R.id.mainFish);
+        ham = findViewById(R.id.mainHam);
+        roll = findViewById(R.id.mainRoll);
+        taco = findViewById(R.id.mainTaco);
+        turkey = findViewById(R.id.mainTurkey);
+        fries = findViewById(R.id.mainFries);
+        banana = findViewById(R.id.mainBanana);
+        icecream = findViewById(R.id.mainIcecream);
+        cupcake = findViewById(R.id.mainCupcake);
+        maccoron = findViewById(R.id.mainMaccaron);
 
         myUser = getIntent().getStringExtra("username");
 
@@ -59,6 +84,102 @@ public class MainPage extends AppCompatActivity {
                 return false;
             }
         });
+        pizza.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Pizza");
+            }
+        });
+        burger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Beef Burger");
+            }
+        });
+        donut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Donut");
+            }
+        });
+        onion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Onion Ring");
+            }
+        });
+        hotdog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Hot Dog");
+            }
+        });
+        bento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Bento");
+            }
+        });
+        fish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Fish Set");
+            }
+        });
+        ham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Ham");
+            }
+        });
+        roll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Spring Roll");
+            }
+        });
+        taco.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Taco Bell");
+            }
+        });
+        turkey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Turkey");
+            }
+        });
+        fries.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("French Fries");
+            }
+        });
+        banana.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Banana Split");
+            }
+        });
+        icecream.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Ice-Cream");
+            }
+        });
+        cupcake.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Cupcake");
+            }
+        });
+        maccoron.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFood("Maccoron");
+            }
+        });
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +187,31 @@ public class MainPage extends AppCompatActivity {
                 Intent intent = new Intent(v.getContext(), MainSearch.class);
                 intent.putExtra("username", myUser);
                 startActivity(intent);
+            }
+        });
+
+    }
+    public void addFood(String food){
+        ref = FirebaseDatabase.getInstance().getReference("cart").child(myUser).child(food);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    int value = Integer.parseInt(snapshot.child("ammount").getValue().toString()) + 1;
+                    ref = FirebaseDatabase.getInstance().getReference("cart").child(myUser).child(food);
+                    ref.child("food").setValue(food);
+                    ref.child("ammount").setValue(String.valueOf(value));
+                    Toast.makeText(MainPage.this, food + " Has been added to cart", Toast.LENGTH_LONG).show();
+                }else{
+                    ref = FirebaseDatabase.getInstance().getReference("cart").child(myUser).child(food);
+                    ref.child("food").setValue(food);
+                    ref.child("ammount").setValue(String.valueOf(1));
+                    Toast.makeText(MainPage.this, food + " has been added to cart", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

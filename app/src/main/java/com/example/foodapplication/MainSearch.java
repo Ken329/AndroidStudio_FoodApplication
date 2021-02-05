@@ -1,5 +1,6 @@
 package com.example.foodapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
@@ -30,8 +32,8 @@ public class MainSearch extends AppCompatActivity {
     int[] image = {R.mipmap.banana_round, R.mipmap.beef_burger_round, R.mipmap.bento_round, R.mipmap.cupcake_round, R.mipmap.donut_round,
     R.mipmap.fish_round, R.mipmap.fries_round, R.mipmap.ham_round, R.mipmap.hot_dog_round, R.mipmap.icecream_round, R.mipmap.macarron_round,
     R.mipmap.onion_ring_round, R.mipmap.pizza_round, R.mipmap.spring_roll_round, R.mipmap.taco_round, R.mipmap.turkey_round};
-    String[] name = {"Banana Split", "Beef Burger", "Bento", "Cupcake", "Donut", "Fish Set", "French Fries", "Ham", "Hot Dog", "Ice-cream",
-    "Maccoron", "Onion Ring", "Pizza", "Spring Roll", "TacoBell", "Turkey"};
+    String[] name = {"Banana Split", "Beef Burger", "Bento", "Cupcake", "Donut", "Fish Set", "French Fries", "Ham", "Hot Dog", "Ice-Cream",
+    "Maccoron", "Onion Ring", "Pizza", "Spring Roll", "Taco Bell", "Turkey"};
     String[] rate = {"4.3", "4.0", "4.8", "3.5", "4.2", "4.5", "4.9", "4.7", "4.2", "3.8", "4.4", "4.6", "4.4", "4.0", "4.7", "4.2"};
     String[] fees = {"2.99", "1.99", "4.99", "1.99", "0.99", "2.99", "Free", "3.99", "2.99", "1.99", "4.99", "2.99", "3.99", "2.99",
     "4.99", "3.99"};
@@ -52,7 +54,7 @@ public class MainSearch extends AppCompatActivity {
             detail detail = new detail(image[i], name[i], rate[i], fees[i]);
             arrayList.add(detail);
         }
-        adapter = new customAdapter(this, arrayList);
+        adapter = new customAdapter(this, arrayList, myUser);
         list.setAdapter(adapter);
 
         back.setOnClickListener(new View.OnClickListener() {
