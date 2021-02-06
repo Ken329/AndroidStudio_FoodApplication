@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/cartLayoutName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Food Name"
+                android:textColor="@color/black"
+                android:textSize="15dp"></TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/button"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center">
+                <TextView
+                    android:id="@+id/cartLayoutMinus"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="-"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/cartLayoutAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+            <LinearLayout
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/button"
+                android:layout_gravity="center">
+                <TextView
+                    android:id="@+id/cartLayoutPlus"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="+"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"></TextView>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/cartLayoutPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:text="Price"
+                android:textColor="@color/black"
+                android:textSize="18dp"></TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

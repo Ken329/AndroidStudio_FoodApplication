@@ -140,19 +140,24 @@ public class customAdapter extends BaseAdapter {
     }
     public void addFood(String food){
         ref = FirebaseDatabase.getInstance().getReference("cart").child(myUser).child(food);
+        calculatePrice c1 = new calculatePrice();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    int value = Integer.parseInt(snapshot.child("ammount").getValue().toString()) + 1;
+                    int value = Integer.parseInt(snapshot.child("amount").getValue().toString()) + 1;
+                    String price = c1.calculate(food, String.valueOf(value));
                     ref = FirebaseDatabase.getInstance().getReference("cart").child(myUser).child(food);
-                    ref.child("food").setValue(food);
-                    ref.child("ammount").setValue(String.valueOf(value));
+                    ref.child("amount").setValue(String.valueOf(value));
+                    ref.child("price").setValue(price);
                     Toast.makeText(context.getApplicationContext(), food + " Has been added to cart", Toast.LENGTH_LONG).show();
                 }else{
+                    String price = c1.calculate(food, "1");
                     ref = FirebaseDatabase.getInstance().getReference("cart").child(myUser).child(food);
                     ref.child("food").setValue(food);
-                    ref.child("ammount").setValue(String.valueOf(1));
+                    ref.child("amount").setValue("1");
+                    ref.child("username").setValue(myUser);
+                    ref.child("price").setValue(price);
                     Toast.makeText(context.getApplicationContext(), food + " has been added to cart", Toast.LENGTH_LONG).show();
                 }
             }

@@ -24,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class MainPage extends AppCompatActivity {
     ActionBarDrawerToggle toggle = null;
     DrawerLayout sideMenu;
@@ -32,6 +34,8 @@ public class MainPage extends AppCompatActivity {
     LinearLayout search;
     ImageView pizza, burger, donut, onion, hotdog, bento, fish, ham, roll, taco, turkey, fries, banana, icecream, cupcake, maccoron;
     DatabaseReference ref;
+    int value = 0;
+    ArrayList<String> arrayName, arrayAmount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,18 +71,29 @@ public class MainPage extends AppCompatActivity {
         View v = sideView.getHeaderView(0);
         TextView username = (TextView)v.findViewById(R.id.sideUsername);
         username.setText(myUser);
+
+        arrayAmount = new ArrayList<>();
+        arrayName = new ArrayList<>();
         sideView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
                 switch (item.getItemId()){
                     case R.id.item1:
-                        Toast.makeText(MainPage.this, "Item 1", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainPage.this, "Profile", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.item2:
-                        Toast.makeText(MainPage.this, "Item 2", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(v.getContext(), MainCart.class);
+                        intent.putExtra("username", myUser);
+                        startActivity(intent);
                         return true;
                     case R.id.item3:
-                        Toast.makeText(MainPage.this, "Item 3", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainPage.this, "Setting", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.item4:
+                        intent = new Intent(v.getContext(), MainActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(MainPage.this, "Logout Successful", Toast.LENGTH_SHORT).show();
                         return true;
                 }
                 return false;
@@ -193,19 +208,25 @@ public class MainPage extends AppCompatActivity {
     }
     public void addFood(String food){
         ref = FirebaseDatabase.getInstance().getReference("cart").child(myUser).child(food);
+        calculatePrice c1 = new calculatePrice();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    int value = Integer.parseInt(snapshot.child("ammount").getValue().toString()) + 1;
+                    value = Integer.parseInt(snapshot.child("amount").getValue().toString()) + 1;
+                    String price = c1.calculate(food, String.valueOf(value));
                     ref = FirebaseDatabase.getInstance().getReference("cart").child(myUser).child(food);
-                    ref.child("food").setValue(food);
-                    ref.child("ammount").setValue(String.valueOf(value));
-                    Toast.makeText(MainPage.this, food + " Has been added to cart", Toast.LENGTH_LONG).show();
+                    ref.child("amount").setValue(String.valueOf(value));
+                    ref.child("price").setValue(price);
+                    Toast.makeText(MainPage.this, food + " has been added to cart", Toast.LENGTH_LONG).show();
                 }else{
+                    value = 1;
+                    String price = c1.calculate(food, String.valueOf(value));
                     ref = FirebaseDatabase.getInstance().getReference("cart").child(myUser).child(food);
                     ref.child("food").setValue(food);
-                    ref.child("ammount").setValue(String.valueOf(1));
+                    ref.child("amount").setValue(value);
+                    ref.child("price").setValue(price);
+                    ref.child("username").setValue(myUser);
                     Toast.makeText(MainPage.this, food + " has been added to cart", Toast.LENGTH_LONG).show();
                 }
             }

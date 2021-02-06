@@ -399,7 +399,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:gravity="center"
-                        android:text="Ice Cream"
+                        android:text="Ice-Cream"
                         android:textColor="@color/black"
                         android:textSize="15dp"></TextView>
                 </LinearLayout>
@@ -437,7 +437,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:gravity="center"
-                        android:text="Maccaron"
+                        android:text="Maccoron"
                         android:textColor="@color/black"
                         android:textSize="15dp"></TextView>
                 </LinearLayout>
