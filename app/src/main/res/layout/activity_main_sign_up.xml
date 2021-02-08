@@ -6,146 +6,156 @@
     android:layout_height="match_parent"
     tools:context=".MainSignUp">
 
-    <ImageButton
-        android:id="@+id/signUpback"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/button"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:layout_constraintHorizontal_bias="0.356"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/abc_vector_test" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/food_foreground"
-        tools:ignore="VectorDrawableCompat" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Food Menu"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:textStyle="bold"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Create new username"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.278"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <EditText
-        android:id="@+id/signUpUsername"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/edit_text"
-        android:drawableLeft="@drawable/ic_baseline_people_24"
-        android:drawablePadding="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Create new password"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.278"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpUsername" />
-
-    <EditText
-        android:id="@+id/signUpPassword"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/edit_text"
-        android:drawableLeft="@drawable/ic_baseline_security_24"
-        android:drawablePadding="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpUsername" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Confirm your password"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.278"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpPassword" />
-
-    <EditText
-        android:id="@+id/signUpConpass"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/edit_text"
-        android:drawableLeft="@drawable/ic_baseline_security_24"
-        android:drawablePadding="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpPassword" />
-
-    <LinearLayout
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:background="@drawable/button"
-        android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpConpass">
-
-        <TextView
-            android:id="@+id/signUpEnter"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Sign Up"
-            android:textColor="@color/white"
-            android:textSize="18dp"></TextView>
-    </LinearLayout>
+            android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/signUpBack"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/abc_vector_test" />
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/food_foreground"
+                tools:ignore="VectorDrawableCompat" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Food Menu"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:textStyle="bold"></TextView>
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Create Username"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/signUpUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edit_text"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:drawableLeft="@drawable/ic_baseline_people_24"
+                    android:drawablePadding="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Create Password"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/signUpPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edit_text"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:drawableLeft="@drawable/ic_baseline_security_24"
+                    android:drawablePadding="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Confirm Password"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/signUpConpass"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edit_text"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:drawableLeft="@drawable/ic_baseline_security_24"
+                    android:drawablePadding="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Age"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/signUpAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edit_text"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:drawableLeft="@drawable/ic_baseline_people_24"
+                    android:drawablePadding="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/signUpGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edit_text"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:drawableLeft="@drawable/ic_baseline_people_24"
+                    android:drawablePadding="10dp"/>
+                <LinearLayout
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp">
+                    <TextView
+                        android:id="@+id/signUpEnter"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Sign Up"
+                        android:textSize="15dp"
+                        android:gravity="center"
+                        android:textColor="@color/black"></TextView>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

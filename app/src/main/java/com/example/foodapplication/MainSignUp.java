@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainSignUp extends AppCompatActivity {
     ImageButton back;
-    EditText username, password, conPass;
+    EditText username, password, conPass, age, gender;
     TextView enter;
     DatabaseReference ref;
     @Override
@@ -29,10 +29,12 @@ public class MainSignUp extends AppCompatActivity {
         setContentView(R.layout.activity_main_sign_up);
         getSupportActionBar().hide();
 
-        back = findViewById(R.id.signUpback);
+        back = findViewById(R.id.signUpBack);
         username = findViewById(R.id.signUpUsername);
         password = findViewById(R.id.signUpPassword);
         conPass = findViewById(R.id.signUpConpass);
+        age = findViewById(R.id.signUpAge);
+        gender = findViewById(R.id.signUpGender);
         enter = findViewById(R.id.signUpEnter);
 
         enter.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +43,8 @@ public class MainSignUp extends AppCompatActivity {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
                 String conP = conPass.getText().toString();
+                String myAge = age.getText().toString();
+                String gen = gender.getText().toString();
                 if(pass.equals(conP)){
                     Query query = FirebaseDatabase.getInstance().getReference("user")
                             .orderByChild("username")
@@ -51,9 +55,9 @@ public class MainSignUp extends AppCompatActivity {
                             if(snapshot.exists()){
                                 Toast.makeText(MainSignUp.this, "Username appear, please check", Toast.LENGTH_LONG).show();
                             }else{
+                                user_detail newUser = new user_detail(user, pass, myAge, gen);
                                 ref = FirebaseDatabase.getInstance().getReference().child("user");
-                                ref.child(user).child("username").setValue(user);
-                                ref.child(user).child("password").setValue(pass);
+                                ref.child(user).setValue(newUser);
                                 Toast.makeText(MainSignUp.this, "Sign Up Successfully", Toast.LENGTH_SHORT).show();
                                 goBack(v);
                             }

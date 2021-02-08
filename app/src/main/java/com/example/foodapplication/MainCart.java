@@ -24,7 +24,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 public class MainCart extends AppCompatActivity {
     ImageButton back;
@@ -36,7 +39,9 @@ public class MainCart extends AppCompatActivity {
     Double douAmount, douTax, douTotal;
     ArrayList<String> arrayName, arrayAmount, arrayPrice;
     DatabaseReference ref;
-    private  static DecimalFormat d2f = new DecimalFormat("#.##");
+    private static DecimalFormat d2f = new DecimalFormat("#.##");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    Random random = new Random();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,9 +98,9 @@ public class MainCart extends AppCompatActivity {
                     list.setAdapter(adapter);
                     douTax = douAmount * 0.06;
                     douTotal = douTax + douAmount;
-                    amount.setText(String.valueOf(douAmount));
-                    tax.setText(String.valueOf(d2f.format(douTax)));
-                    total.setText(String.valueOf(d2f.format(douTotal)));
+                    amount.setText(d2f.format(douAmount));
+                    tax.setText(d2f.format(douTax));
+                    total.setText(d2f.format(douTotal));
                 }
             }
             @Override
@@ -116,6 +121,21 @@ public class MainCart extends AppCompatActivity {
                 if(enterText.equals("Go To Cart")){
                     goBack(v);
                 }else{
+                    Date date = new Date();
+                    String food = "";
+                    int rant = random.nextInt(1000);
+                    ref = FirebaseDatabase.getInstance().getReference("history").child(myUser).child(String.valueOf(rant));
+                    for(int i = 0; i < arrayAmount.size(); i++){
+                        food += arrayName.get(i) + ", ";
+                    }
+                    String filterFood = food.substring(0, food.length() - 2);
+                    filterFood += " ...";
+                    ref.child("food").setValue(filterFood);
+                    ref.child("total").setValue(d2f.format(douTotal));
+                    ref.child("date").setValue(dateFormat.format(date));
+                    ref.child("username").setValue(myUser);
+                    ref = FirebaseDatabase.getInstance().getReference("cart").child(myUser);
+                    ref.removeValue();
                     Toast.makeText(MainCart.this, "Thank you for ordering with us", Toast.LENGTH_LONG).show();
                 }
             }

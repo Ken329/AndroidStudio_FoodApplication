@@ -40,6 +40,7 @@ public class MainPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+
         sideMenu = findViewById(R.id.drawLayout);
         sideView = findViewById(R.id.navView);
         search = findViewById(R.id.mainSearch);
@@ -88,9 +89,14 @@ public class MainPage extends AppCompatActivity {
                         startActivity(intent);
                         return true;
                     case R.id.item3:
-                        Toast.makeText(MainPage.this, "Setting", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(v.getContext(), MainHistory.class);
+                        intent.putExtra("username", myUser);
+                        startActivity(intent);
                         return true;
                     case R.id.item4:
+                        Toast.makeText(MainPage.this, "Setting", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.item5:
                         intent = new Intent(v.getContext(), MainActivity.class);
                         startActivity(intent);
                         Toast.makeText(MainPage.this, "Logout Successful", Toast.LENGTH_SHORT).show();

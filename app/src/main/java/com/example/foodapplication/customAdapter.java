@@ -29,6 +29,7 @@ public class customAdapter extends BaseAdapter {
     ArrayList<detail> arrayList;
     String myUser;
     DatabaseReference ref;
+    int value = 0;
     public customAdapter(Context mContext, List<detail> detailList, String username) {
         this.context = mContext;
         this.detailList = detailList;
@@ -145,19 +146,20 @@ public class customAdapter extends BaseAdapter {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    int value = Integer.parseInt(snapshot.child("amount").getValue().toString()) + 1;
+                    value = Integer.parseInt(snapshot.child("amount").getValue().toString()) + 1;
                     String price = c1.calculate(food, String.valueOf(value));
                     ref = FirebaseDatabase.getInstance().getReference("cart").child(myUser).child(food);
                     ref.child("amount").setValue(String.valueOf(value));
                     ref.child("price").setValue(price);
-                    Toast.makeText(context.getApplicationContext(), food + " Has been added to cart", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context.getApplicationContext(), food + " has been added to cart", Toast.LENGTH_LONG).show();
                 }else{
-                    String price = c1.calculate(food, "1");
+                    value = 1;
+                    String price = c1.calculate(food, String.valueOf(value));
                     ref = FirebaseDatabase.getInstance().getReference("cart").child(myUser).child(food);
                     ref.child("food").setValue(food);
-                    ref.child("amount").setValue("1");
-                    ref.child("username").setValue(myUser);
+                    ref.child("amount").setValue(value);
                     ref.child("price").setValue(price);
+                    ref.child("username").setValue(myUser);
                     Toast.makeText(context.getApplicationContext(), food + " has been added to cart", Toast.LENGTH_LONG).show();
                 }
             }
