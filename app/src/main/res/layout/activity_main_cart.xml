@@ -19,11 +19,12 @@
 
         <ImageButton
             android:id="@+id/mainCartBack"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="12dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/button"
+            android:elevation="8dp"
             app:srcCompat="@drawable/abc_vector_test" />
 
         <TextView

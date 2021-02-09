@@ -81,7 +81,9 @@ public class MainPage extends AppCompatActivity {
                 Intent intent = null;
                 switch (item.getItemId()){
                     case R.id.item1:
-                        Toast.makeText(MainPage.this, "Profile", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(v.getContext(), MainProfile.class);
+                        intent.putExtra("username", myUser);
+                        startActivity(intent);
                         return true;
                     case R.id.item2:
                         intent = new Intent(v.getContext(), MainCart.class);
@@ -94,7 +96,9 @@ public class MainPage extends AppCompatActivity {
                         startActivity(intent);
                         return true;
                     case R.id.item4:
-                        Toast.makeText(MainPage.this, "Setting", Toast.LENGTH_SHORT).show();
+                        intent = new Intent(v.getContext(), MainSetting.class);
+                        intent.putExtra("username", myUser);
+                        startActivity(intent);
                         return true;
                     case R.id.item5:
                         intent = new Intent(v.getContext(), MainActivity.class);
